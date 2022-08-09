@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <title>Records</title>
+    <style>
+        .inn {
+            font-family: Roboto, Arial, sans-serif;
+            color: #666;
+            text-align: center;
+        }
+        
+        .navbar-nav .nav-link.active,
+        .navbar-light .navbar-nav .nav-link.show,
+        .navbar-light .navbar-nav .show>.nav-link {
+            color: #fff !important;
+        }
+    </style>
+
+
+</head>
+
+
+<body style="background-color:#fff6f6">
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#0080ff;">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="margin-left:6%">
+                <a class="nav-item nav-link active bar" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link  active bar" href="#">Features</a>
+                <!-- <a class="nav-item nav-link" href="#">Pricing</a>
+        <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <br>
+        <div class="inn">
+            <h2>View Records</h2>
+        </div>
+        <!-- <div style=" text-align: right;">
+        <button type="button" class="btn btn-primary" style="background: #1c87c9;">Home</button>
+      </div> -->
+
+        <div class="col-sm-30" style="margin-left: auto; margin-right:auto;">
+            <table class="table table-bordered" style="margin-top:5%">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item Description</th>
+                        <th scope="col">Installation Date</th>
+                        <th scope="col">Expiry Date</th>
+                        <th scope="col">Responsible Person</th>
+                        <th scope="col">Expires In</th>
+                        <th scope="col"></th>
+
+
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    {% for license in object_list %}
+
+                   
+                    <tr>
+                        <td>{{ license.id}}</td>
+                        <td>{{ license.item_description}}</td>
+                        <td>{{ license.Installation_Date}}</td>
+                        <td>{{ license.Expiry_Date}}</td>
+                        <td>{{ license.Responsible_person}}</td>
+                        <td>{{license.Installation_Date|timesince:license.Expiry_Date}}</td>
+                        <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' license.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td>
+
+                    </tr>
+
+                    
+                    {% endfor %}
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+
+<!-- for clearing the recent files 
+ python manage.py shell
+
+from django.contrib.admin.models import LogEntry
+LogEntry.objects.all().delete() --
+
+ 
