@@ -9,6 +9,8 @@ from django.views import View
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.core.mail import EmailMessage
+from django.utils.timezone import localdate
+
 
 
 from core.forms import LicenseForm
@@ -18,7 +20,8 @@ class LicenseListView(ListView):
     model = License
     all_licenses= License.objects.all()
     for license in all_licenses:
-        tiempo_transcurrido=license.Expiry_Date-datetime.datetime.now()
+        print(license.item_description)
+        tiempo_transcurrido=license.Expiry_Date - localdate()
         print(datetime.timedelta(minutes=10))
         print(license.Expiry_Date)
         print(tiempo_transcurrido)
