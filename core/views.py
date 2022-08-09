@@ -16,6 +16,14 @@ from .models import License
 
 class LicenseListView(ListView):
     model = License
+    all_licenses= License.objects.all()
+    for license in all_licenses:
+        tiempo_transcurrido=license.Expiry_Date-datetime.datetime.now()
+        print(datetime.timedelta(minutes=10))
+        print(license.Expiry_Date)
+        print(tiempo_transcurrido)
+    if(license.Expiry_Date <=tiempo_transcurrido):
+          print("The license:"+ str(license.id) + " is about to expire in 10 minutes" )
 
 #create your views here.
 class LicenseCreateview(CreateView):
@@ -54,14 +62,8 @@ class notificacionMailView(View):
         # send e-mail
         email.send()
         print("email sent OK")
-        all_licenses= License.objects.all()
-        for license in all_licenses:
-         tiempo_transcurrido=license.Expiry_Date-datetime.datetime.now
-         print(datetime.timedelta(minutes=10))
-         print(license.Expiry_Date)
-         print(tiempo_transcurrido)
-        if(license.Expiry_Date <=tiempo_transcurrido):
-          print("The license:"+ str(license.id) + " is about to expire in 10 minutes" )
+       
+        
         
         return redirect('list') 
     
