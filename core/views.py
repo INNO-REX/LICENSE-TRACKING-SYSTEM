@@ -1,4 +1,4 @@
-import datetime
+#import datetime
 from email.message import EmailMessage
 import smtplib
 from typing import Any
@@ -10,6 +10,9 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.core.mail import EmailMessage
 from django.utils.timezone import localdate
+from datetime import datetime
+
+
 
 
 
@@ -19,16 +22,17 @@ from .models import License
 class LicenseListView(ListView):
     model = License
     all_licenses= License.objects.all()
+    print(all_licenses)
     for license in all_licenses:
-        print(license.item_description)
-        tiempo_transcurrido=license.Expiry_Date - localdate()
-        print(datetime.timedelta(minutes=10))
-        print(license.Expiry_Date)
-        print(tiempo_transcurrido)
-    if(license.Expiry_Date <=tiempo_transcurrido):
-          print("The license:"+ str(license.id) + " is about to expire in 10 minutes" )
-
-#create your views here.
+        today=datetime.now().date()
+        Expiry_Date=license.Expiry_Date
+        if(Expiry_Date-today).days>2:
+            print("The license:"+str(license.id)+"is about to Expir in" +str((Expiry_Date-today).days)+"days") 
+        print(today)
+        print(Expiry_Date)
+        print(Expiry_Date-today)
+       
+ #create your views here.
 class LicenseCreateview(CreateView):
    model = Licenseform_class =LicenseForm
    success_url =reverse_lazy('create')
@@ -65,8 +69,6 @@ class notificacionMailView(View):
         # send e-mail
         email.send()
         print("email sent OK")
-       
-        
-        
+     
         return redirect('list') 
     

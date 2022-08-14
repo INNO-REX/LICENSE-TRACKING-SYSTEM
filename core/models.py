@@ -10,10 +10,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class License(models.Model):
     #item_description = models.CharField(max_length=30)
     item_description  = models.CharField(max_length=50,unique=True)
-    Installation_Date =models.DateTimeField()
-    Expiry_Date = models.DateTimeField()
-   
-# Responsible_person= models.CharField(max_length=30)
+    Installation_Date =models.DateField()
+    Expiry_Date = models.DateField()
+    
+    # Responsible_person= models.CharField(max_length=30)
     PERSON_SELECT = (
         ('System Admin', 'System Admin'),
         ('Network Admin', 'Network Admin'),
