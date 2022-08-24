@@ -1,4 +1,5 @@
 #import datetime
+from email import message
 from email.message import EmailMessage
 import smtplib
 from typing import Any
@@ -26,11 +27,13 @@ class LicenseListView(ListView):
     for license in all_licenses:
         today=datetime.now().date()
         Expiry_Date=license.Expiry_Date
-        if(Expiry_Date-today).days>2:
-            print("The license:"+str(license.id)+"is about to Expir in" +str((Expiry_Date-today).days)+"days") 
+        if(Expiry_Date-today).days<=2:
+            print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days") 
         print(today)
         print(Expiry_Date)
         print(Expiry_Date-today)
+        
+
        
  #create your views here.
 class LicenseCreateview(CreateView):
@@ -60,10 +63,21 @@ class notificacionMailView(View):
         print("conectando...")
         #
         email_to=[]
-        email_to.append("wwrandazzo@gmail.com")
+        # email_to.append("wwrandazzo@gmail.com")
+        email_to.append("innocent94.kasoma@gmail.com")
         # create  e-mail
-        subject='license id{}'.format(self.kwargs['id'])
-        # subject = 'NOTIFICATION OF LICENSE via email'
+        subject='license id {}'.format(self.kwargs['id'])
+        message=""
+        all_licenses= License.objects.all()
+        print(all_licenses)
+        for license in all_licenses:
+            today=datetime.now().date()
+            Expiry_Date=license.Expiry_Date
+            if(Expiry_Date-today).days<=4:
+               
+                message+="The license:" + str(license.id)+ "is about to Expire in" + str ((Expiry_Date-today).days) + "days"
+               # print("The license:"+str(license.id)+"is about to Expir in" +str((Expiry_Date-today).days)+"days") 
+        #subject = 'NOTIFICATION OF ELIAM LICENSE'
         message = 'This is a notificaicon because the license is about to expire.'
         email = EmailMessage(subject, message,settings.EMAIL_HOST_USER,email_to)
         # send e-mail
@@ -71,4 +85,10 @@ class notificacionMailView(View):
         print("email sent OK")
      
         return redirect('list') 
+    def get_context_data(self, **kwargs):
+            context= super().get_context_data(**kwargs)
+            context['informe'] = self.kwargs['informe']
+            context['nombre_informe']= Tipoinforme.objects.get(pk=self.kwargs['informe']).nombre 
+            context['Materias'] = Materia.objects.filter(curso=self.kwargs['curso'])
+            return context
     

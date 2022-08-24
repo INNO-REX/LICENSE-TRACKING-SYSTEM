@@ -1,3 +1,4 @@
+from argparse import OPTIONAL
 from datetime import date
 from pickle import FALSE, TRUE
 import django
@@ -12,6 +13,8 @@ class License(models.Model):
     item_description  = models.CharField(max_length=50,unique=True)
     Installation_Date =models.DateField()
     Expiry_Date = models.DateField()
+    license.created = models.DateField(auto_now_add=True)
+    license.updated = models.DateField(auto_now_add=True)
     
     # Responsible_person= models.CharField(max_length=30)
     PERSON_SELECT = (
@@ -20,35 +23,5 @@ class License(models.Model):
         ('o', 'Other'),
     )
     Responsible_person=models.CharField(max_length=50,choices=PERSON_SELECT)
-   
-   
-    #active = models.BooleanField()
-    #def __str__(self):
-        #return self.item_description
+ 
 
-
-
-
-#def __str__(self):
-   # return f"{self.Name} @ ${self.Amount} every {self.PayDate} of the month"
-
-   
-  
-  
-    
-
-created = models.DateTimeField(auto_now_add=True)
-updated = models.DateTimeField(auto_now_add=True)
-
-#fields = (TRUE, 'gender',)
-
-#radio_fields = {'gender': admin.VERTICAL}
-    
-
-
-# class License(models.Model):
-#     item_name = models.CharField(max_length=30)
-#     expiry_date = models.IntegerField() 
-#     created = models.DateTimeField(auto_now_add=True)
-#     updated = models.DateTimeField(auto_now_add=True)
-    

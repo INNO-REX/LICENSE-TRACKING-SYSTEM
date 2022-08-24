@@ -64,7 +64,7 @@
                         <th scope="col">Expiry Date</th>
                         <th scope="col">Responsible Person</th>
                         <th scope="col">Expires In</th>
-                        <th scope="col"></th>
+                        <th scope="col">Notification</th>
 
 
                     </tr>
@@ -72,8 +72,11 @@
 
 
                 <tbody>
+                   
+                    
                     {% for license in object_list %}
 
+                    
                    
                     <tr>
                         <td>{{ license.id}}</td>
@@ -81,15 +84,16 @@
                         <td>{{ license.Installation_Date}}</td>
                         <td>{{ license.Expiry_Date}}</td>
                         <td>{{ license.Responsible_person}}</td>
+                  
                         <td>{{license.Installation_Date|timesince:license.Expiry_Date}}</td>
+                       
                         <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' license.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td>
 
                     </tr>
 
-                    
                     {% endfor %}
                     
-
+           
                 </tbody>
             </table>
         </div>
@@ -107,4 +111,3 @@
 from django.contrib.admin.models import LogEntry
 LogEntry.objects.all().delete() --
 
- 
