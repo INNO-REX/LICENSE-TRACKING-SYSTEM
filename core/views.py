@@ -85,10 +85,17 @@ class notificacionMailView(View):
         print("email sent OK")
      
         return redirect('list') 
+  
     def get_context_data(self, **kwargs):
             context= super().get_context_data(**kwargs)
-            context['informe'] = self.kwargs['informe']
-            context['nombre_informe']= Tipoinforme.objects.get(pk=self.kwargs['informe']).nombre 
-            context['Materias'] = Materia.objects.filter(curso=self.kwargs['curso'])
+        #licenses that meet the condition
+            meetcondition=[]
+            all_licenses= License.objects.all()
+            for license in all_licenses:
+                today=datetime.now().date()
+            Expiry_Date=license.Expiry_Date
+            if(Expiry_Date-today).days<=4:
+                meetcondition.append(license.pk)
+            meet_condition_licenses = License.objects.filter(pk__in=meetcondition)
             return context
     
