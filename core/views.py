@@ -49,7 +49,7 @@ class LicenseListView(ListView):
             context['meet_condition_licenses'] = meet_condition_licenses
             context['all_licenses'] = all_licenses
             return context
-        #mail------
+        #mail---auto send---
         print("here in Notifications")
         mailServer = smtplib.SMTP(settings.EMAIL_HOST,settings.EMAIL_PORT)
         #print(mailServer.ehlo())
@@ -59,8 +59,8 @@ class LicenseListView(ListView):
         print("conecting...")
         #
         email_to=[]
-        # email_to.append("wwrandazzo@gmail.com")
-        email_to.append("innocent94.kasoma@gmail.com")
+        # email_to.append("ail.com")
+        email_to.append("a@gmail.com")
         # create  e-mail
         subject='Eliam mail notification'
         message=""
@@ -71,13 +71,13 @@ class LicenseListView(ListView):
         for license in all_licenses:
             today=datetime.now().date()
             Expiry_Date=license.Expiry_Date
-            if(Expiry_Date-today).days<=2:
+            if(Expiry_Date-today).days>=2:
                
                 # message+="The license:" + str(license.id)+ "is about to Exp in" + str ((Expiry_Date-today).days) + "days"
                 # print("The license:"+str(license.id)+"is about to Expir in" +str((Expiry_Date-today).days)+"days") 
                 message=""
                 Expiry_Date=license.Expiry_Date
-                if(Expiry_Date-today).days<=2:
+                if(Expiry_Date-today).days>=2:
                     print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days") 
                     # message = 'You have received this Notification because the ''license_description {}'.format(license.item_description) +  ('is about to Expire in') + str((Expiry_Date-today)) + "days"
                     message+="The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days"
@@ -120,8 +120,8 @@ def license_form(request):
 #         print("conecting...")
 #         #
 #         email_to=[]
-#         # email_to.append("wwrandazzo@gmail.com")
-#         email_to.append("innocent94.kasoma@gmail.com")
+#         # email_to.append(".com")
+#         email_to.append("@gmail.com")
 #         # create  e-mail
 #         subject='license id {}'.format(self.kwargs['id'])
 #         message=""
