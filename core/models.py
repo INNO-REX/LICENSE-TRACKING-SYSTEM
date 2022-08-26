@@ -9,12 +9,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class License(models.Model):
-    #item_description = models.CharField(max_length=30)
     item_description  = models.CharField(max_length=50,unique=True)
     Installation_Date =models.DateField()
     Expiry_Date = models.DateField()
-    license.created = models.DateField(auto_now_add=True)
-    license.updated = models.DateField(auto_now_add=True)
+    # license.created = models.DateField(auto_now_add=True)
+    # license.updated = models.DateField(auto_now_add=True)
     
     # Responsible_person= models.CharField(max_length=30)
     PERSON_SELECT = (

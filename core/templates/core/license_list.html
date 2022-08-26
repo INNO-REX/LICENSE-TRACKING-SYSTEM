@@ -73,26 +73,47 @@
 
                 <tbody>
                 
-                    
-                    {% for license in object_list %}
-                    {% for license in meet_condition_licenses %}  
-                    {{ license.id}}
-                    {% endfor %} 
+                    {% for li in meet_condition_licenses %}  
+                    {{ li.Expiry_Date}}
                     <tr>
+                        <td>{{ li.id}}</td>
+                        <td>{{ li.item_description}}</td>
+                        <td>{{ li.Installation_Date}}</td>
+                        {% if li.Expiry_Date in meet_condition_licenses %}
+                        <td style="color: red;">{{ li.Expiry_Date }}</td>
+                        {% else %}
+                        <td>{{ li.Expiry_Date}}</td>
+                        {% endif %}
+                       
+                        <td >{{ li.Responsible_person }}</td>
+                        
+                        <td>{{li.Installation_Date|timesince:li.Expiry_Date}}</td>
+                        <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' li.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td>
+
+                    </tr>
+                  
+                    {% endfor %} 
+                    {% for license in all_licenses %}
+                    
+                    {% comment %} <tr>
                         <td>{{ license.id}}</td>
                         <td>{{ license.item_description}}</td>
                         <td>{{ license.Installation_Date}}</td>
+                        {% if license.Expiry_Date in meet_condition_licenses %}
+                        <td style="color: red;">{{ license.Expiry_Date }}</td>
+                        {% else %}
                         <td>{{ license.Expiry_Date}}</td>
-                        <td>{{ license.Responsible_person}}</td>
+                        {% endif %}
+                       
+                        <td >{{ license.Responsible_person }}</td>
+                        
                         <td>{{license.Installation_Date|timesince:license.Expiry_Date}}</td>
                         <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' license.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td>
 
                     </tr>
-                 
+                  {% endcomment %}
                     {% endfor %}
-                  
-                   
-               
+                 
                 </tbody>
             </table>
         </div>
