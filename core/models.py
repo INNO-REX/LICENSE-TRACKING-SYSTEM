@@ -22,5 +22,10 @@ class License(models.Model):
         ('o', 'Other'),
     )
     Responsible_person=models.CharField(max_length=50,choices=PERSON_SELECT)
- 
 
+    def age_in_days(self):
+        today = date.today()
+        result = self.Expiry_Date- today
+        return result.days
+ 
+# 

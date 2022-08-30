@@ -29,27 +29,35 @@ class LicenseListView(ListView):
     for license in all_licenses:
         today=datetime.now().date()
         Expiry_Date=license.Expiry_Date
-        if(Expiry_Date-today).days<=2:
-            print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days") 
-        print(today)
-        print(Expiry_Date)
-        print(Expiry_Date-today)
+        if(Expiry_Date-today).days<=10:
+            print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today)  .days)+"days") 
+        # print(today)
+        # print(Expiry_Date)
+        # print(Expiry_Date-today)
         def get_context_data(self, **kwargs):
             context= super().get_context_data(**kwargs)
+
         #licenses that meet the condition
             meetcondition=[]
+            meet_condition_licenses=""
             all_licenses= License.objects.all()
             for license in all_licenses:
                 today=datetime.now().date()
                 Expiry_Date=license.Expiry_Date
-                if(Expiry_Date-today).days<=2:
+                if(Expiry_Date-today).days<=10:
                     meetcondition.append(license.Expiry_Date)
                     meet_condition_licenses = License.objects.filter(Expiry_Date__in=meetcondition)
                     print(license.Expiry_Date)
             context['meet_condition_licenses'] = meet_condition_licenses
             context['all_licenses'] = all_licenses
             return context
-        #mail---auto send---
+
+
+
+        #mail=======================================================auto send---
+        # 
+        # 
+        # 
         print("here in Notifications")
         mailServer = smtplib.SMTP(settings.EMAIL_HOST,settings.EMAIL_PORT)
         #print(mailServer.ehlo())
@@ -59,29 +67,31 @@ class LicenseListView(ListView):
         print("conecting...")
         #
         email_to=[]
-        # email_to.append("ail.com")
-        email_to.append("a@gmail.com")
+        # email_to.append("wwrandazzo@gmail.com")
+        email_to.append("innocent94.kasoma@gmail.com")
         # create  e-mail
-        subject='Eliam mail notification'
+        subject='License mail notification'
         message=""
         
         all_licenses= License.objects.all()
-        print(all_licenses)
+        #print(all_licenses)
         today=datetime.now().date()
         for license in all_licenses:
             today=datetime.now().date()
             Expiry_Date=license.Expiry_Date
-            if(Expiry_Date-today).days>=2:
+            if(Expiry_Date-today).days<=10:
+              
                
                 # message+="The license:" + str(license.id)+ "is about to Exp in" + str ((Expiry_Date-today).days) + "days"
                 # print("The license:"+str(license.id)+"is about to Expir in" +str((Expiry_Date-today).days)+"days") 
                 message=""
                 Expiry_Date=license.Expiry_Date
-                if(Expiry_Date-today).days>=2:
-                    print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days") 
-                    # message = 'You have received this Notification because the ''license_description {}'.format(license.item_description) +  ('is about to Expire in') + str((Expiry_Date-today)) + "days"
-                    message+="The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days"
+                if(Expiry_Date-today).days<=10:
+                    #print("The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days") 
+                    message+= 'You have received this Notification because the License for'' {}'.format( license.item_description ) +  ( '  will Expire on | ') + str((Expiry_Date))
+                    #message+="The license:"+str(license.id)+"is about to Expire in" +str((Expiry_Date-today).days)+"days"
                 subject = 'NOTIFICATION OF ELIAM LICENSE'
+                
        
         
       
@@ -89,6 +99,7 @@ class LicenseListView(ListView):
         # send e-mail
         email.send()
         print("email sent OK")
+
         
 
        
@@ -97,6 +108,10 @@ class LicenseCreateview(CreateView):
    model = Licenseform_class =LicenseForm
    success_url =reverse_lazy('create')
 
+# class LicenseMeet(CreateView):
+#    model = Licenseform_class =LicenseMeet
+#    success_url =reverse_lazy('meet')
+
 def get_queryset(self):
     dia_de_hoy= datetime.now(). date()
     context = License.objects.filter(Expiry_Date_gte=dia_de_hoy).order_by('-id')
@@ -104,9 +119,6 @@ def get_queryset(self):
 
 def license_form(request):
     return render(request, 'core/base.html')
-
-#def  license_form(request):
-    #return render(request, 'core/licence_form.html')
 
 #Notification email view
 # class notificacionMailView(View):
@@ -120,8 +132,8 @@ def license_form(request):
 #         print("conecting...")
 #         #
 #         email_to=[]
-#         # email_to.append(".com")
-#         email_to.append("@gmail.com")
+#         # email_to.append("wwrandazzo@gmail.com")
+#         email_to.append("innocent94.kasoma@gmail.com")
 #         # create  e-mail
 #         subject='license id {}'.format(self.kwargs['id'])
 #         message=""

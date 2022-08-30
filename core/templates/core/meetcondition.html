@@ -73,27 +73,13 @@
 
                 <tbody>
 
-                    {% for li in object_list %}
-
-                    <tr>
-                        <td>{{ li.id}}</td>
-                        <td>{{ li.item_description}}</td>
-                        <td>{{ li.Installation_Date}}</td>
-                        <td>{{ li.Expiry_Date}}</td>
-                        <td>{{ li.Responsible_person}}</td>
-                  
-                        <td>{{li.Installation_Date|timesince:li.Expiry_Date}}</td>
-                        <td>{{ li.age_in_days }}  days</td
-                       
-                        {% comment %} <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' license.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td> {% endcomment %}
-
                     </tr>
 
                     {% endfor %}
                 
-                    {% comment %} {% for li in meet_condition_licenses %}   {% endcomment %}
-                    {% comment %} {{ li.Expiry_Date}} {% endcomment %}
-                    {% comment %} <tr>
+                     {% for li in meet_condition_licenses %}
+                     {{ li.Expiry_Date}} 
+                     <tr>
                         <td>{{ li.id}}</td>
                         <td>{{ li.item_description}}</td>
                         <td>{{ li.Installation_Date}}</td>
@@ -105,10 +91,10 @@
                        
                         <td >{{ li.Responsible_person }}</td>
                         
-                        <td>{{li.Installation_Date|timesince:li.Expiry_Date}}</td> {% endcomment %}
+                        <td>{{li.Installation_Date|timesince:li.Expiry_Date}}</td> 
                         {% comment %} <td><a class="btn btn-secondary btn-sm" href="{% url 'mail' li.id %}" role="button" target="_blank" data-toggle="tooltip" data-placement="top" title="Email Notification"><i class="fa fa-mail"></i></a></td> {% endcomment %}
 
-                    {% comment %} </tr>  {% endcomment %}
+                     </tr>  
                   
                    
                     
