@@ -122,17 +122,19 @@ class LicenseListView(ListView):
 #    model = Licenseform_class =LicenseForm
 #    success_url =reverse_lazy('create')
 
-# class LicenseMeet(CreateView):
-#    model = Licenseform_class =LicenseMeet
-#    success_url =reverse_lazy('meet')
+
 
 def get_queryset(self):
     dia_de_hoy= datetime.now(). date()
     context = License.objects.filter(Expiry_Date_gte=dia_de_hoy).order_by('-id')
     return context
 
-def license_form(request):
-    return render(request, 'core/license_list.html')
+# def license_form(request):
+#     return render(request, 'core/base.html')
+
+# class LicenseCreateview(CreateView):
+#    model = Licenseform_class =LicenseForm
+#    success_url =reverse_lazy('create')
 
 #Notification email view
 # class notificacionMailView(View):

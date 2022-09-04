@@ -1,5 +1,6 @@
 from argparse import OPTIONAL
 from datetime import date
+from os import path
 from pickle import FALSE, TRUE
 import django
 from django import forms
@@ -12,10 +13,6 @@ class License(models.Model):
     item_description  = models.CharField(max_length=50,unique=True)
     Installation_Date =models.DateField()
     Expiry_Date = models.DateField()
-    # license.created = models.DateField(auto_now_add=True)
-    # license.updated = models.DateField(auto_now_add=True)
-    
-    # Responsible_person= models.CharField(max_length=30)
     PERSON_SELECT = (
         ('System Admin', 'System Admin'),
         ('Network Admin', 'Network Admin'),
@@ -27,5 +24,15 @@ class License(models.Model):
         today = date.today()
         result = self.Expiry_Date- today
         return result.days
+
+class myModelAdmin(admin.ModelAdmin):
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls =[
+            path('list/',
+        self.admin_site.admin_view(self.list))
+                ]
+        return my_urls + urls
+        
+   
  
-# 
