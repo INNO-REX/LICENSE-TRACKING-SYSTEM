@@ -129,8 +129,8 @@ def get_queryset(self):
     context = License.objects.filter(Expiry_Date_gte=dia_de_hoy).order_by('-id')
     return context
 
-# def license_form(request):
-#     return render(request, 'core/base.html')
+def license_form(request):
+    return render(request, 'core/base.html')
 
 # class LicenseCreateview(CreateView):
 #    model = Licenseform_class =LicenseForm

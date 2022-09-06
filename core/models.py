@@ -25,14 +25,14 @@ class License(models.Model):
         result = self.Expiry_Date- today
         return result.days
 
-class myModelAdmin(admin.ModelAdmin):
-    def get_urls(self):
-        urls = super().get_urls()
-        my_urls =[
-            path('list/',
-        self.admin_site.admin_view(self.list))
-                ]
-        return my_urls + urls
+# class myModelAdmin(admin.ModelAdmin):
+#     def get_urls(self):
+#         urls = super().get_urls()
+#         my_urls =[
+#             path('list',
+#         self.admin_site.admin_view(self.list))
+#                 ]
+#         return my_urls + urls
         
    
  
