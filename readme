@@ -1,0 +1,16 @@
+
+
+
+views.py =line 70 replace the email address to that you want to receive the email
+
+user name= Admin1
+password= @Worldflower
+
+in settings.py replace the email address to that which will be the sender of the email
+and create an app password and replace the one which is there
+
+line 150 EMAIL_HOST_USER = 'senders email address'
+line 151 EMAIL_HOST_PASSWORD = 'app_password'
+
+im using the admin interface so that i can change the them of the django admin dashboard
+    in viertual environment myenv file in lib i have copied the base and the base.html code to the one which is in the template directory

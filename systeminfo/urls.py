@@ -17,9 +17,7 @@ from django import views
 from django.contrib import admin
 from django.urls import path 
 from core.views import LicenseListView
-# from core.views import LicenseCreateview
-# from core.views import license_form
-# from core.views import notificacionMailView
+
 
 admin.autodiscover()
 
@@ -28,10 +26,4 @@ urlpatterns = [
     path('admin/', admin.site.urls,name='admin'),
     path('list', admin.site.urls,name='list'),
     path('', LicenseListView.as_view(), name='list'),
-    
-   
-    # path('create',LicenseCreateview.as_view(),name='create'),
-    # path ('',license_form, name='license_form'),
-    # path('mail/<int:id>/', notificacionMailView.as_view(),name='mail'),
-
 ]
