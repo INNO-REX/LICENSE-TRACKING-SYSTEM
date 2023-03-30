@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # rexy django keys =============================================
 
-# UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='core_license';
+ #UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='core_license';
 
 #<!-- for clearing the recent files 
 #  python manage.py shell
@@ -93,11 +93,15 @@ WSGI_APPLICATION = 'systeminfo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'systeminfodb',
+        'USER': 'root',
+        'PASSWORD': '@Worldflower',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+       
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

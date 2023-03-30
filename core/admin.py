@@ -8,4 +8,4 @@ from django.contrib.auth.models import Group
 # Register your models here.
 admin.site.register(License)
 admin.site.unregister(Group)
-admin.site.site_header = 'LICENSE AND CONTRACTS TRACKING SYSTEM'
+admin.site.site_header = 'LICENSE TRACKING SYSTEM'
