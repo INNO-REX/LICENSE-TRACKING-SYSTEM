@@ -1,13 +1,42 @@
+Introduction
+
+The online tracking system is a powerful tool that can help individuals and organizations keep track of important items and their expiration dates. With this system,
+users can set reminders for when an item is about to expire, ensuring that they never miss an important deadline. The system works by allowing users to input 
+information about the item, such as its name, expiration date, and any other relevant details. Once this information is entered, the system will automatically generate 
+reminders based on the user's preferences.
+
+Benefits of Using the Online Tracking System
+
+One of the main benefits of using the online tracking system is that it can help users avoid costly mistakes. For example, if a user forgets to renew their driver's 
+license on time, they could face hefty fines or even legal consequences. By using the online tracking system, users can ensure that they receive timely reminders before 
+their license expires. Another benefit of the system is that it can help users stay organized. Instead of relying on memory or paper-based systems, users can keep all
+of their important expiration dates in one place. This can save time and reduce stress, especially for individuals or organizations with many items to track
+
+How the Online Tracking System Works
+
+To use the online tracking system, users must first create an account and log in. From there, they can input information about the item they want to track, including
+its name, expiration date, and any other relevant details. Once the item is added to the system, users can set up reminders based on their preferences. For example, 
+they may choose to receive an email reminder one week before the item expires, or a text message reminder on the day of expiration.
+
+Conclusion
+
+Overall, the online tracking system is a valuable tool for anyone who needs to keep track of important items and their expiration dates. With its customizable 
+reminders, note-taking capabilities, and robust security features, the system can help users stay organized and avoid costly mistakes.
 
 
 
-views.py =line 70 replace the email address to that you want to receive the email
+A MUST DO
+
+In views.py =line 70 replace the email address to that you want to receive the email
+
+LOGIN DETAILS 
 
 user name= Admin1
 password= @Worldflower
 
+
 in settings.py replace the email address to that which will be the sender of the email
-and create an app password and replace the one which is there
+and create an app password from gmail and replace the one which is there
 
 line 150 EMAIL_HOST_USER = 'senders email address'
 line 151 EMAIL_HOST_PASSWORD = 'app_password'
